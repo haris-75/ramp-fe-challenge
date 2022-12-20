@@ -31,6 +31,8 @@ export function App() {
 
   const loadTransactionsByEmployee = useCallback(
     async (employeeId: string) => {
+      // invalidating data for transactionsByEmployee in order to show LOADING.. text
+      transactionsByEmployeeUtils.invalidateData()
       paginatedTransactionsUtils.invalidateData()
       await transactionsByEmployeeUtils.fetchById(employeeId)
     },

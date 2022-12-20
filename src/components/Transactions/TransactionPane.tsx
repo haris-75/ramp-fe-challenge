@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { InputCheckbox } from "../InputCheckbox"
 import { TransactionPaneComponent } from "./types"
 
@@ -28,7 +28,7 @@ export const TransactionPane: TransactionPaneComponent = ({
             newValue,
           })
 
-          setApproved(newValue)
+          setApproved(!approved)
         }}
       />
     </div>

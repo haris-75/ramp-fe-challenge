@@ -22,11 +22,11 @@ export function App() {
   const loadAllTransactions = useCallback(async () => {
     setIsLoading(true)
     transactionsByEmployeeUtils.invalidateData()
-
     await employeeUtils.fetchAll()
-    await paginatedTransactionsUtils.fetchAll()
-
+    // isLoading is made false when employee list is fetched
     setIsLoading(false)
+
+    await paginatedTransactionsUtils.fetchAll()
   }, [employeeUtils, paginatedTransactionsUtils, transactionsByEmployeeUtils])
 
   const loadTransactionsByEmployee = useCallback(
@@ -74,7 +74,8 @@ export function App() {
         <div className="RampGrid">
           <Transactions transactions={transactions} />
 
-          {transactions !== null && (
+          {/* Updated condition in order to work view more button correctly */}
+          {(transactions !== null ? !transactionsByEmployee && transactions.length < 14 : false) && (
             <button
               className="RampButton"
               disabled={paginatedTransactionsUtils.loading}
